@@ -6,7 +6,7 @@ models when they are created.
 Just add the package via composer
 
 ```
-composer install joelshepherd/create-with
+composer require joelshepherd/create-with
 ```
 
 ## Usage
