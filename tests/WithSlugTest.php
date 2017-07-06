@@ -11,6 +11,21 @@ class WithSlugTest extends TestCase
             method_exists(new TestSlugModel(), 'bootWithSlug')
         );
     }
+
+    public function testSlugGenerateMethod()
+    {
+        $model = new TestSlugModel();
+
+        $this->assertRegExp(
+            '/^[A-Za-z0-9]+(?:-[a-z0-9]+)*$/',
+            $model->generateCandidateSlug('')
+        );
+
+        $this->assertRegExp(
+            '/^[A-Za-z0-9]+(?:-[a-z0-9]+)*$/',
+            $model->generateCandidateSlug('test-title')
+        );
+    }
 }
 
 class TestSlugModel extends Model

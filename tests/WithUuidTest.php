@@ -11,6 +11,16 @@ class WithUUidTest extends TestCase
             method_exists(new TestUuidModel(), 'bootWithUuid')
         );
     }
+
+    public function testUuid4GenerateMethod()
+    {
+        $model = new TestUuidModel();
+
+        $this->assertRegExp(
+            '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i',
+            $model->generateCandidateUuid()
+        );
+    }
 }
 
 class TestUuidModel extends Model

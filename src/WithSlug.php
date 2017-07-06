@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 namespace JoelShepherd\CreateWith;
 
 use Illuminate\Support\Str;
@@ -8,17 +6,42 @@ use Illuminate\Support\Str;
 trait WithSlug
 {
     /**
-     * Get the slug field name.
+     * Generate a candidate slug that will be tested for uniqueness.
      *
+     * @param string $base The slug transform of the base text.
      * @return string
      */
-    protected function getSlugField()
+    public function generateCandidateSlug(string $base): string
     {
-        return 'slug';
+        $random = Str::lower(Str::random($this->getSlugRandomLength()));
+        return trim("$base-$random", '-');
     }
 
     /**
-     * Get the text to generate the base slug from.
+    * Bind generation logic to the creating event.
+     *
+     * @return void
+     */
+    public static function bootWithSlug()
+    {
+        static::creating(function ($model) {
+            $base = $model->getSlugBaseText()
+                ? Str::lower(Str::slug($model->getSlugBaseText()))
+                : '';
+
+            $model->forceFill([$model->getSlugField() => $base]);
+
+            $attributes = Support::generate(
+                $model, $model->getSlugField(),
+                [$model, 'generateCandidateSlug'], $base
+            );
+
+            $model->forceFill($attributes);
+        });
+    }
+
+    /**
+     * Get the base text to generate the slug from.
      *
      * @return ?string
      */
@@ -28,43 +51,24 @@ trait WithSlug
     }
 
     /**
+     * Get the slug field name.
+     *
+     * @return string
+     */
+    protected function getSlugField(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * Get the length of the randomly generated slug suffix.
      * This is used when no slug text is provided or if it
      * cannot find a unique value from just the text.
      *
      * @return int
      */
-    protected function getSlugRandomLength()
+    protected function getSlugRandomLength(): int
     {
         return 7;
-    }
-
-    /**
-     * Attach to the creating event
-     *
-     * @return void
-     */
-    public static function bootWithSlug()
-    {
-        static::creating(function ($model) {
-            // Try with just the slug text
-            $base = Str::slug($model->getSlugBaseText());
-            $attributes = [
-                $model->getSlugField() => $base
-            ];
-
-            // Otherwise add random suffix
-            if (! $base || $model->existsWithAttributes($attributes)) {
-                do {
-                    $random = Str::lower(Str::random($model->getSlugRandomLength()));
-
-                    $attributes = [
-                        $model->getSlugField() => ($base ? "$base-": '').$random
-                    ];
-                } while (Support::exists(static::class, $attributes));
-            }
-
-            $model->forceFill($attributes);
-        });
     }
 }

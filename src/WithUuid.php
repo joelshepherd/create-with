@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 namespace JoelShepherd\CreateWith;
 
 use Ramsey\Uuid\Uuid;
@@ -8,30 +6,38 @@ use Ramsey\Uuid\Uuid;
 trait WithUuid
 {
     /**
-     * Get the uuid field name
+     * Generate a candidate UUID that will be tested for uniqueness.
      *
      * @return string
      */
-    protected function getUuidField()
+    public function generateCandidateUuid(): string
     {
-        return 'uuid';
+        return Uuid::uuid4();
     }
 
     /**
-     * Attach to the creating event
+     * Bind generation logic to the creating event.
      *
      * @return void
      */
     public static function bootWithUuid()
     {
         static::creating(function ($model) {
-            do {
-                $attributes = [
-                    $model->getUuidField() => Uuid::uuid4()
-                ];
-            } while (Support::exists(static::class, $attributes));
+            $attributes = Support::generate(
+                $model, $model->getUuidField(), [$model, 'generateCandidateUuid']
+            );
 
             $model->forceFill($attributes);
         });
+    }
+
+    /**
+     * Get the uuid field name.
+     *
+     * @return string
+     */
+    protected function getUuidField(): string
+    {
+        return 'uuid';
     }
 }
