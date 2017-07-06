@@ -1,6 +1,8 @@
 {
     "name": "joelshepherd/create-with",
+    "description": "Easily add common unique identity fields to Laravel models.",
     "type": "library",
+    "keywords": ["laravel", "eloquent", "uuid", "slug"],
     "license": "MIT",
     "authors": [
         {
