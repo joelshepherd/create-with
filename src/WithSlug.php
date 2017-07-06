@@ -3,6 +3,9 @@ namespace JoelShepherd\CreateWith;
 
 use Illuminate\Support\Str;
 
+/**
+ * Adds an unique slug to the model.
+ */
 trait WithSlug
 {
     /**

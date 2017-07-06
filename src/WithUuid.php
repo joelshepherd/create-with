@@ -3,6 +3,9 @@ namespace JoelShepherd\CreateWith;
 
 use Ramsey\Uuid\Uuid;
 
+/**
+ * Adds an unique UUID to the model.
+ */
 trait WithUuid
 {
     /**
