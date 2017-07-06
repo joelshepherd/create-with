@@ -16,8 +16,22 @@ trait WithSlug
      */
     public function generateCandidateSlug(string $base): string
     {
-        $random = Str::lower(Str::random($this->getSlugRandomLength()));
+        $random = $this->convertTextToSlug(
+            Str::random($this->getSlugRandomLength())
+        );
+
         return trim("$base-$random", '-');
+    }
+
+    /**
+     * Method used to convert text into a slug.
+     *
+     * @param string $text
+     * @return string
+     */
+    public function convertTextToSlug(string $text): string
+    {
+        return Str::slug($text);
     }
 
     /**
@@ -29,7 +43,7 @@ trait WithSlug
     {
         static::creating(function ($model) {
             $base = $model->getSlugBaseText()
-                ? Str::lower(Str::slug($model->getSlugBaseText()))
+                ? $this->convertTextToSlug($model->getSlugBaseText())
                 : '';
 
             $model->forceFill([$model->getSlugField() => $base]);

@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Added
+- New method that can override the text to slug conversion function.
+
 ## [0.2.0] - 2017-07-06
 ### Added
 - Handler for maximum attempts at finding a unique value.
