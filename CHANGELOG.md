@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.0] - 2017-07-06
 ### Added
 - Handler for maximum attempts at finding a unique value.
 
