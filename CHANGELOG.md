@@ -13,7 +13,10 @@
 - Generation code moved to a callback so it can be overwritten.
 - Minimum PHP version requirement to 7.0.
 
-## [0.1.0] - 2017-07-05
+## 0.1.0 - 2017-07-05
 ### Added
 - New `WithUuid` trait that provides UUIDs.
 - New `WithSlug` trait that provides slug generation.
+
+[Unreleased]: https://github.com/joelshepherd/create-with/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/joelshepherd/create-with/compare/0.1.0...0.2.0
