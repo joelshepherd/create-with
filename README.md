@@ -81,5 +81,28 @@ $example2 = Example::create([
 $example2->slug; // this-is-a-title-7iw90lj
 ```
 
+### Create with IP address
+Adds the requester's IP address to the model.
+
+**Default options**
+- `getIpAddressField()` returns `ip_address`
+
+```php
+<?php
+use JoelShepherd\CreateWith\WithIpAddress;
+
+class Example extends Model
+{
+    use WithIpAddress;
+}
+```
+
+```php
+<?php
+
+$example = Example::create();
+$example->ip_address; // 127.0.0.1
+```
+
 ## Contributing
 Bug and feature pull requests are welcome. If you have any feature requests, feel free to create an issue with your proposal.
