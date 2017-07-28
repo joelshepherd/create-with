@@ -15,7 +15,10 @@ trait WithIpAddress
      */
     public function getIpAddress(): string
     {
-        return Request::capture()->ip() ?: gethostbyname(gethostname());
+        // Check for an existing request object
+        $request = function_exists('app') ? app('request') : Request::capture();
+
+        return $request->ip() ?: gethostbyname(gethostname());
     }
 
     /**
