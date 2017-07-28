@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use JoelShepherd\CreateWith\WithIpAddress;
 use PHPUnit\Framework\TestCase;
 

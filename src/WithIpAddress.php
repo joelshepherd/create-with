@@ -1,6 +1,8 @@
 <?php
 namespace JoelShepherd\CreateWith;
 
+use Illuminate\Http\Request;
+
 /**
  * Adds IP Address (v4) to the model.
  */
@@ -13,10 +15,7 @@ trait WithIpAddress
      */
     public function getIpAddress(): string
     {
-        return getenv('HTTP_CLIENT_IP') ?: getenv('HTTP_X_FORWARDED_FOR')
-	        ?: getenv('HTTP_X_FORWARDED') ?: getenv('HTTP_FORWARDED_FOR')
-	        ?: getenv('HTTP_FORWARDED') ?: getenv('REMOTE_ADDR')
-			?: gethostbyname(gethostname());
+        return Request::capture()->ip() ?: gethostbyname(gethostname());
     }
 
     /**
