@@ -1,6 +1,5 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use JoelShepherd\CreateWith\WithIpAddress;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +16,7 @@ class WithIpAddressTest extends TestCase
     {
         $model = new TestIpAddressModel();
 
-		$this->assertTrue(false !== filter_var($model->getIpAddress(), FILTER_VALIDATE_IP));
+        $this->assertTrue(false !== filter_var($model->getIpAddress(), FILTER_VALIDATE_IP));
     }
 }
 
