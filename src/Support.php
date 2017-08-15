@@ -21,7 +21,7 @@ class Support
      */
     public static function attempt(int &$attempts)
     {
-        if ($attempts > static::$maxAttempts) {
+        if ($attempts >= static::$maxAttempts) {
             throw new EntropyException('Unable to find a unique value.');
         }
 
