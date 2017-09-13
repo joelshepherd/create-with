@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 /**
  * Adds an unique slug to the model.
  */
-trait WithSlug
+trait Slug
 {
     /**
      * Generate a candidate slug that will be tested for uniqueness.
@@ -39,14 +39,16 @@ trait WithSlug
      *
      * @return void
      */
-    public static function bootWithSlug()
+    public static function bootSlug()
     {
         static::creating(function ($model) {
             $base = $model->getSlugBaseText()
                 ? $this->convertTextToSlug($model->getSlugBaseText())
                 : '';
 
-            $model->forceFill([$model->getSlugField() => $base]);
+            $model->forceFill([
+                $model->getSlugField() => $base
+            ]);
 
             $attributes = Support::generate(
                 $model, $model->getSlugField(),

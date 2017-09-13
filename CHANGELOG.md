@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+### Added
+- New helper `SlugModel` and `UuidModel` base models that override the primary identifier.
+
+### Changed
+- Traits no longer have the `With` prefix.
+
 ## [0.3.0] - 2017-07-28
 ### Added
 - New `WithIpAddress` trait that adds requester's IP address. ([#1](https://github.com/joelshepherd/create-with/pull/1))

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 /**
  * Adds IP Address (v4) to the model.
  */
-trait WithIpAddress
+trait IpAddress
 {
     /**
      * Get the IP Address
@@ -16,7 +16,9 @@ trait WithIpAddress
     public function getIpAddress(): string
     {
         // Check for an existing request object
-        $request = function_exists('app') ? app('request') : Request::capture();
+        $request = function_exists('app')
+            ? app(Request::class)
+            : Request::capture();
 
         return $request->ip() ?: gethostbyname(gethostname());
     }
@@ -26,10 +28,12 @@ trait WithIpAddress
      *
      * @return void
      */
-    public static function bootWithIpAddress()
+    public static function bootIpAddress()
     {
         static::creating(function ($model) {
-            $model->forceFill([$model->getIpAddressField() => $model->getIpAddress()]);
+            $model->forceFill([
+                $model->getIpAddressField() => $model->getIpAddress()
+            ]);
         });
     }
 

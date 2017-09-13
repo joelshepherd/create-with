@@ -1,12 +1,12 @@
 <?php
 namespace JoelShepherd\CreateWith;
 
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Uuid as UuidGenerator;
 
 /**
- * Adds an unique UUID to the model.
+ * Adds an unique UUID (v4) to the model.
  */
-trait WithUuid
+trait Uuid
 {
     /**
      * Generate a candidate UUID that will be tested for uniqueness.
@@ -15,7 +15,7 @@ trait WithUuid
      */
     public function generateCandidateUuid(): string
     {
-        return Uuid::uuid4();
+        return UuidGenerator::uuid4();
     }
 
     /**
@@ -23,7 +23,7 @@ trait WithUuid
      *
      * @return void
      */
-    public static function bootWithUuid()
+    public static function bootUuid()
     {
         static::creating(function ($model) {
             $attributes = Support::generate(
