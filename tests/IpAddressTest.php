@@ -1,14 +1,14 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
-use JoelShepherd\CreateWith\WithIpAddress;
+use JoelShepherd\CreateWith\IpAddress;
 use PHPUnit\Framework\TestCase;
 
-class WithIpAddressTest extends TestCase
+class IpAddressTest extends TestCase
 {
     public function testTraitAttachesToModel()
     {
         $this->assertTrue(
-            method_exists(new TestIpAddressModel(), 'bootWithIpAddress')
+            method_exists(new TestIpAddressModel(), 'bootIpAddress')
         );
     }
 
@@ -22,5 +22,5 @@ class WithIpAddressTest extends TestCase
 
 class TestIpAddressModel extends Model
 {
-    use WithIpAddress;
+    use IpAddress;
 }

@@ -9,6 +9,11 @@
     convertWarningsToExceptions="true"
     processIsolation="false"
     stopOnFailure="false">
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory>./src</directory>
+        </whitelist>
+    </filter>
     <testsuites>
         <testsuite name="Tests">
             <directory>./tests</directory>

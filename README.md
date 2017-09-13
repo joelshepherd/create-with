@@ -1,13 +1,16 @@
-# Create with X - Laravel Models
+# Create With - Laravel Models
 A simple package that provides traits to add common indentity fields to Laravel
 models when they are created. 
 
 This package is designed to work out of the box with just the traits. No other
 configuration is needed.
 
-## Install
-Install the package via composer. Minimum PHP version is 7.0.
+## Installation
+**Dependencies**
+- PHP 7
+- Laravel 5.*
 
+**Composer**
 ```
 composer require joelshepherd/create-with
 ```
@@ -24,11 +27,11 @@ Adds an unique UUID to the model.
 
 ```php
 <?php
-use JoelShepherd\CreateWith\WithUuid;
+use JoelShepherd\CreateWith;
 
 class Example extends Model
 {
-    use WithUuid;
+    use CreateWith\Uuid;
 }
 ```
 
@@ -51,11 +54,11 @@ for uniqueness.
 
 ```php
 <?php
-use JoelShepherd\CreateWith\WithSlug;
+use JoelShepherd\CreateWith;
 
 class Example extends Model
 {
-    use WithSlug;
+    use CreateWith\Slug;
 
     // Optionally set the base string to build the slug from
     protected function getSlugBaseText()
@@ -93,7 +96,7 @@ use JoelShepherd\CreateWith\WithIpAddress;
 
 class Example extends Model
 {
-    use WithIpAddress;
+    use CreateWith\IpAddress;
 }
 ```
 
@@ -105,4 +108,4 @@ $example->ip_address; // 127.0.0.1
 ```
 
 ## Contributing
-Bug and feature pull requests are welcome. If you have any feature requests, feel free to create an issue with your proposal.
+Submitting issues and pull requests for bugs, features and feature requests are welcome.

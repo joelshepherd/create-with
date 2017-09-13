@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
-use JoelShepherd\CreateWith\WithUuid;
+use JoelShepherd\CreateWith\Uuid;
 use PHPUnit\Framework\TestCase;
 
 class WithUUidTest extends TestCase
@@ -8,7 +8,7 @@ class WithUUidTest extends TestCase
     public function testTraitAttachesToModel()
     {
         $this->assertTrue(
-            method_exists(new TestUuidModel(), 'bootWithUuid')
+            method_exists(new TestUuidModel(), 'bootUuid')
         );
     }
 
@@ -25,5 +25,5 @@ class WithUUidTest extends TestCase
 
 class TestUuidModel extends Model
 {
-    use WithUuid;
+    use Uuid;
 }

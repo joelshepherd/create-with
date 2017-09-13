@@ -1,14 +1,14 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
-use JoelShepherd\CreateWith\WithSlug;
+use JoelShepherd\CreateWith\Slug;
 use PHPUnit\Framework\TestCase;
 
-class WithSlugTest extends TestCase
+class SlugTest extends TestCase
 {
     public function testTraitAttachesToModel()
     {
         $this->assertTrue(
-            method_exists(new TestSlugModel(), 'bootWithSlug')
+            method_exists(new TestSlugModel(), 'bootSlug')
         );
     }
 
@@ -30,5 +30,5 @@ class WithSlugTest extends TestCase
 
 class TestSlugModel extends Model
 {
-    use WithSlug;
+    use Slug;
 }
