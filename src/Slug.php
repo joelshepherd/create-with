@@ -24,17 +24,6 @@ trait Slug
     }
 
     /**
-     * Method used to convert text into a slug.
-     *
-     * @param string $text
-     * @return string
-     */
-    public function convertTextToSlug(string $text): string
-    {
-        return Str::slug($text);
-    }
-
-    /**
     * Bind generation logic to the creating event.
      *
      * @return void
@@ -43,7 +32,7 @@ trait Slug
     {
         static::creating(function ($model) {
             $base = $model->getSlugBaseText()
-                ? $this->convertTextToSlug($model->getSlugBaseText())
+                ? Str::slug($model->getSlugBaseText())
                 : '';
 
             $model->forceFill([
